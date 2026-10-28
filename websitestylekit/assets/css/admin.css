@@ -1,0 +1,909 @@
+/* Website Stylekit Admin Styles */
+
+/* Reset WP admin defaults for our page */
+.wsk-wrap {
+	--wsk-primary: #7c3aed;
+	--wsk-primary-hover: #6d28d9;
+	--wsk-primary-soft: #faf5ff;
+	--wsk-border: #e0e0e0;
+	--wsk-text: #1e1e1e;
+	--wsk-muted: #646970;
+	margin-left: -20px;
+	margin-top: 0;
+	padding: 0;
+	background: #f0f0f1;
+	min-height: 100vh;
+	accent-color: var(--wsk-primary);
+}
+
+/* Header bar */
+.wsk-header {
+	background: #fff;
+	border-bottom: 1px solid #e0e0e0;
+	padding: 0 24px;
+}
+
+.wsk-header-inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 52px;
+}
+
+.wsk-header__left {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.wsk-header__icon {
+	display: block;
+	width: 28px;
+	height: 28px;
+	flex-shrink: 0;
+}
+
+.wsk-header__title {
+	font-size: 16px;
+	font-weight: 600;
+	color: #1e1e1e;
+	margin: 0;
+	padding: 0;
+}
+
+.wsk-header__version {
+	font-size: 12px;
+	color: var(--wsk-primary);
+	background: var(--wsk-primary-soft);
+	padding: 3px 9px;
+	border-radius: 999px;
+}
+
+/* Navigation */
+.wsk-header__nav {
+	display: flex;
+	gap: 18px;
+}
+
+.wsk-header__link {
+	text-decoration: none;
+	color: #555;
+	font-size: 13px;
+	font-weight: 500;
+	transition: color 0.15s;
+}
+
+.wsk-header__link:hover {
+	color: var(--wsk-primary);
+}
+
+.wsk-header__link--active {
+	color: var(--wsk-primary);
+	font-weight: 600;
+}
+
+/* Tab panels */
+.wsk-tab-panel {
+	display: none;
+}
+
+.wsk-tab-panel.active {
+	display: block;
+}
+
+/* Content area */
+.wsk-content {
+	max-width: 840px;
+	margin: 32px auto;
+	padding: 0 32px;
+}
+
+/* Cards */
+.wsk-card {
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	padding: 32px;
+	margin-bottom: 24px;
+}
+
+.wsk-card h2 {
+	font-size: 16px;
+	font-weight: 600;
+	color: #1e1e1e;
+	margin: 0 0 8px;
+	padding: 0;
+}
+
+.wsk-card h3 {
+	font-size: 14px;
+	font-weight: 600;
+	color: #1e1e1e;
+	margin: 24px 0 12px;
+	padding: 0;
+}
+
+.wsk-description {
+	color: #646970;
+	font-size: 14px;
+	margin: 0 0 24px;
+	line-height: 1.5;
+}
+
+/* Section labels */
+.wsk-section-label {
+	font-size: 13px;
+	font-weight: 600;
+	color: #646970;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	margin: 20px 0 10px;
+	padding: 0;
+}
+
+/* Format toggle */
+.wsk-format-toggle {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-bottom: 24px;
+}
+
+.wsk-advanced-export {
+	border-top: 1px solid #e0e0e0;
+	margin: 4px 0 24px;
+	padding-top: 18px;
+}
+
+.wsk-advanced-export summary {
+	color: #646970;
+	cursor: pointer;
+	font-size: 13px;
+	font-weight: 600;
+	list-style-position: inside;
+}
+
+.wsk-advanced-export .wsk-format-toggle {
+	margin: 16px 0 0;
+}
+
+.wsk-export-scope {
+	display: none;
+}
+
+.wsk-export-scope.active {
+	display: block;
+}
+
+.wsk-radio-label {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	cursor: pointer;
+	font-size: 14px;
+	color: #1e1e1e;
+}
+
+/* Hide native radio — draw our own via ::before */
+.wsk-wrap input[type="radio"] {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+	width: 0;
+	height: 0;
+}
+
+.wsk-radio-label::before {
+	content: '';
+	display: block;
+	width: 18px;
+	height: 18px;
+	min-width: 18px;
+	border: 2px solid #c3c4c7;
+	border-radius: 50%;
+	background: #fff;
+	box-sizing: border-box;
+	transition: border-color 0.15s;
+}
+
+.wsk-radio-label:hover::before {
+	border-color: var(--wsk-primary);
+}
+
+.wsk-radio-label:has(input:checked)::before {
+	border-color: var(--wsk-primary);
+	background: radial-gradient(circle, var(--wsk-primary) 42%, transparent 42%), #fff;
+}
+
+.wsk-radio-label span:first-of-type {
+	font-weight: 500;
+}
+
+.wsk-radio-label--disabled {
+	cursor: not-allowed;
+	opacity: 0.55;
+}
+
+.wsk-radio-label--disabled::before {
+	border-color: #c3c4c7;
+	background: #f6f7f7;
+}
+
+.wsk-radio-label--disabled:hover::before {
+	border-color: #c3c4c7;
+}
+
+/* Checkbox label: same look as the radio labels, but with a real checkbox
+   instead of the drawn radio circle. Fixed label column so multiple rows
+   line up. */
+.wsk-check-label {
+	display: grid;
+	grid-template-columns: 18px 230px 1fr;
+	align-items: start;
+	gap: 10px;
+	cursor: pointer;
+	font-size: 14px;
+	color: #1e1e1e;
+}
+
+.wsk-check-label input[type="checkbox"] {
+	width: 18px;
+	height: 18px;
+	margin: 0;
+	accent-color: var(--wsk-primary);
+}
+
+.wsk-check-label span:first-of-type {
+	font-weight: 500;
+	padding-top: 1px;
+}
+
+/* Same aligned column layout for the radio rows on the Import tab, so the
+   whole form reads as one grid. The drawn radio circle (::before) becomes
+   the first grid column. */
+.wsk-option-grid .wsk-radio-label {
+	display: grid;
+	grid-template-columns: 18px 230px 1fr;
+	align-items: start;
+}
+
+.wsk-option-grid .wsk-radio-label::before {
+	margin-top: 1px;
+}
+
+.wsk-option-grid .wsk-radio-label span:first-of-type {
+	padding-top: 1px;
+}
+
+/* Neutral "next step" block in the import summary */
+.wsk-import-notes {
+	margin-top: 12px;
+	padding: 10px 14px;
+	background: #f0f6fc;
+	border-left: 3px solid #72aee6;
+	border-radius: 4px;
+	font-size: 13px;
+	color: #1e1e1e;
+}
+
+.wsk-import-notes strong {
+	display: block;
+	margin-bottom: 4px;
+}
+
+.wsk-import-notes ul {
+	margin: 0;
+	padding-left: 18px;
+}
+
+/* Backup item title row: name + builder badge on one line */
+.wsk-backup-item__main span.wsk-backup-item__title {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.wsk-backup-item__main .wsk-backup-item__title strong {
+	display: inline;
+}
+
+.wsk-backup-item__main span.wsk-badge--builder {
+	display: inline-block;
+}
+
+/* Icon-only button (e.g. upload backup) */
+.wsk-icon-button {
+	display: inline-flex !important;
+	align-items: center;
+	justify-content: center;
+	padding: 0 8px !important;
+}
+
+.wsk-icon-button svg {
+	display: block;
+}
+
+/* Builder badge on backup items */
+.wsk-badge--builder {
+	display: inline-block;
+	align-self: flex-start;
+	width: fit-content;
+	padding: 2px 8px;
+	border-radius: 10px;
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	background: #f0f0f1;
+	color: #50575e;
+}
+
+.wsk-badge--builder-bricks {
+	background: #fdf3d7;
+	color: #8a6d1d;
+}
+
+.wsk-badge--builder-elementor {
+	background: #f1eafe;
+	color: #5b2ec9;
+}
+
+.wsk-hint {
+	color: #999;
+	font-size: 13px;
+	font-weight: 400 !important;
+}
+
+/* Actions */
+.wsk-actions {
+	display: flex;
+	gap: 8px;
+	margin-bottom: 4px;
+}
+
+.wsk-wrap .button {
+	border-radius: 6px;
+	padding: 6px 20px;
+	height: auto;
+	font-size: 14px;
+	line-height: 1.5;
+	box-shadow: none;
+}
+
+.wsk-wrap .button-primary {
+	background: var(--wsk-primary);
+	border-color: var(--wsk-primary);
+	color: #fff;
+}
+
+.wsk-wrap .button-primary:hover,
+.wsk-wrap .button-primary:focus {
+	background: var(--wsk-primary-hover);
+	border-color: var(--wsk-primary-hover);
+	color: #fff;
+}
+
+.wsk-wrap .button:not(.button-primary) {
+	color: var(--wsk-primary);
+	border-color: var(--wsk-primary);
+	background: #fff;
+}
+
+.wsk-wrap .button:not(.button-primary):hover,
+.wsk-wrap .button:not(.button-primary):focus {
+	color: var(--wsk-primary-hover);
+	border-color: var(--wsk-primary-hover);
+	background: var(--wsk-primary-soft);
+	box-shadow: none;
+}
+
+/* Output textarea */
+#wsk-export-output,
+#wsk-import-input,
+.wsk-backup-viewer-output {
+	width: 100%;
+	font-family: 'SF Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
+	font-size: 13px;
+	line-height: 1.6;
+	padding: 16px;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+	background: #fafafa;
+	color: #1e1e1e;
+	resize: vertical;
+	box-sizing: border-box;
+}
+
+#wsk-import-input {
+	background: #fff;
+}
+
+#wsk-import-input:focus,
+#wsk-export-output:focus,
+.wsk-backup-viewer-output:focus {
+	border-color: var(--wsk-primary);
+	box-shadow: 0 0 0 1px var(--wsk-primary);
+	outline: none;
+}
+
+/* Error */
+.wsk-error {
+	background: #fef2f2;
+	border: 1px solid #fecaca;
+	color: #dc2626;
+	padding: 12px 16px;
+	border-radius: 6px;
+	font-size: 14px;
+	margin-top: 16px;
+}
+
+/* Success message */
+.wsk-success {
+	background: #f0fdf4;
+	border: 1px solid #bbf7d0;
+	color: #16a34a;
+	padding: 12px 16px;
+	border-radius: 6px;
+	font-size: 14px;
+	margin-top: 16px;
+}
+
+/* About page */
+.wsk-about__body {
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	padding: 36px 40px;
+	max-width: 620px;
+}
+
+.wsk-about__photo {
+	display: block;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-bottom: 28px;
+}
+
+.wsk-about__body p {
+	font-size: 16px;
+	line-height: 1.8;
+	color: #444;
+	margin: 0 0 18px;
+}
+
+.wsk-about__body p:last-child {
+	margin-bottom: 0;
+}
+
+.wsk-about__body a {
+	color: var(--wsk-primary);
+	text-decoration: none;
+}
+
+.wsk-about__body a:hover {
+	text-decoration: underline;
+}
+
+.wsk-about__signature {
+	display: block;
+	margin-top: 28px;
+	width: 60px;
+	height: auto;
+}
+
+/* Import options */
+.wsk-import-options {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin: 20px 0 24px;
+}
+
+.wsk-import-preview,
+.wsk-import-result {
+	margin-top: 16px;
+	margin-bottom: 16px;
+	padding: 0;
+	border: 1px solid #e4e4e7;
+	border-radius: 10px;
+	background: #fff;
+	overflow: hidden;
+}
+
+/* Import summary component */
+.wsk-summary__header {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 13px 18px;
+	border-bottom: 1px solid #f0f0f1;
+	font-size: 14px;
+	color: var(--wsk-text);
+}
+
+.wsk-summary__total {
+	margin-left: auto;
+	font-size: 12px;
+	font-weight: 500;
+	padding: 3px 10px;
+	border-radius: 999px;
+	background: var(--wsk-primary-soft);
+	color: var(--wsk-primary);
+	white-space: nowrap;
+}
+
+.wsk-summary--done .wsk-summary__total {
+	background: #ecfdf5;
+	color: #059669;
+}
+
+.wsk-summary__rows {
+	padding: 4px 18px;
+}
+
+.wsk-summary__row {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	padding: 12px 0;
+}
+
+.wsk-summary__row + .wsk-summary__row {
+	border-top: 1px dashed #f0f0f1;
+}
+
+.wsk-summary__row--empty {
+	color: #646970;
+	font-size: 14px;
+}
+
+.wsk-summary__check {
+	width: 18px;
+	height: 18px;
+	flex: none;
+	margin-top: 1px;
+}
+
+.wsk-summary__check circle {
+	fill: none;
+	stroke: #ddd6fe;
+	stroke-width: 1.5;
+}
+
+.wsk-summary__check path {
+	fill: none;
+	stroke: var(--wsk-primary);
+	stroke-width: 2;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.wsk-summary--done .wsk-summary__check circle {
+	fill: #dcfce7;
+	stroke: #bbf7d0;
+}
+
+.wsk-summary--done .wsk-summary__check path {
+	stroke: #16a34a;
+}
+
+.wsk-summary__body {
+	flex: 1;
+	min-width: 0;
+}
+
+.wsk-summary__line {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.wsk-summary__label {
+	font-weight: 600;
+	font-size: 14px;
+	color: var(--wsk-text);
+}
+
+.wsk-badge {
+	font-size: 12px;
+	font-weight: 500;
+	padding: 2px 9px;
+	border-radius: 999px;
+	white-space: nowrap;
+}
+
+.wsk-badge--added {
+	background: var(--wsk-primary-soft);
+	color: var(--wsk-primary);
+}
+
+.wsk-summary--done .wsk-badge--added {
+	background: #ecfdf5;
+	color: #059669;
+}
+
+.wsk-badge--updated {
+	background: #f0f0f1;
+	color: #50575e;
+}
+
+.wsk-summary__names {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-top: 8px;
+}
+
+.wsk-chip {
+	font-family: 'SF Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
+	font-size: 12px;
+	color: #50575e;
+	background: #f6f7f7;
+	border: 1px solid #ececed;
+	border-radius: 6px;
+	padding: 2px 8px;
+	overflow-wrap: anywhere;
+}
+
+.wsk-chip--more {
+	color: #8c8f94;
+	background: transparent;
+	border-style: dashed;
+}
+
+.wsk-summary__footer {
+	padding: 11px 18px;
+	background: #fafafa;
+	border-top: 1px solid #f0f0f1;
+	color: #646970;
+	font-size: 13px;
+}
+
+.wsk-import-warnings {
+	padding: 12px 18px;
+	background: #fffbeb;
+	border-top: 1px solid #fde68a;
+	color: #92400e;
+	font-size: 13px;
+}
+
+.wsk-import-warnings ul {
+	margin: 6px 0 0 18px;
+	list-style: disc;
+}
+
+.wsk-import-warnings li {
+	margin: 3px 0;
+}
+
+/* Informational report of what the import touched besides variables and classes.
+   Neutral on purpose: these are notices, not warnings. */
+.wsk-import-changes {
+	padding: 12px 18px;
+	background: #f6f7f7;
+	border-top: 1px solid #dcdcde;
+	color: #3c434a;
+	font-size: 13px;
+}
+
+.wsk-import-changes ul {
+	margin: 6px 0 0 18px;
+	list-style: disc;
+}
+
+.wsk-import-changes li {
+	margin: 3px 0;
+}
+
+/* Backups */
+.wsk-backup-toolbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	padding: 16px;
+	border: 1px solid #ede9fe;
+	border-radius: 8px;
+	background: var(--wsk-primary-soft);
+	margin-bottom: 16px;
+}
+
+.wsk-backup-toolbar strong,
+.wsk-backup-toolbar span {
+	display: block;
+}
+
+.wsk-backup-toolbar__actions {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+}
+
+.wsk-backup-list {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.wsk-backup-viewer {
+	grid-column: 1 / -1;
+	padding-top: 2px;
+}
+
+.wsk-backup-item {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	gap: 14px 20px;
+	padding: 16px;
+	border: 1px solid #e0e0e0;
+	border-left: 3px solid var(--wsk-primary);
+	border-radius: 8px;
+	background: #fff;
+}
+
+.wsk-backup-item__main strong,
+.wsk-backup-item__main span {
+	display: block;
+}
+
+.wsk-backup-item__main span,
+.wsk-backup-note {
+	color: #646970;
+	font-size: 13px;
+}
+
+.wsk-backup-item__meta {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	justify-content: flex-end;
+	color: #646970;
+	font-size: 13px;
+}
+
+.wsk-backup-item__meta span {
+	padding: 3px 8px;
+	border-radius: 999px;
+	background: var(--wsk-primary-soft);
+	color: var(--wsk-primary-hover);
+}
+
+.wsk-backup-item__actions {
+	grid-column: 1 / -1;
+	display: flex;
+	gap: 8px;
+}
+
+.wsk-backup-note {
+	margin: 16px 0 0;
+}
+
+.wsk-empty-state {
+	padding: 22px;
+	border: 1px dashed #c4b5fd;
+	border-radius: 8px;
+	background: var(--wsk-primary-soft);
+	text-align: center;
+}
+
+.wsk-empty-state strong {
+	display: block;
+	margin-bottom: 6px;
+}
+
+.wsk-empty-state p {
+	margin: 0;
+	color: #646970;
+}
+
+/* Disabled button */
+.wsk-wrap .button[disabled] {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+/* ── Changelog ── */
+.wsk-changelog__body {
+	background: #fff;
+	border: 1px solid #ede9fe;
+	border-radius: 8px;
+	padding: 36px 40px;
+	max-width: 620px;
+}
+
+.wsk-changelog__release + .wsk-changelog__release {
+	margin-top: 40px;
+	padding-top: 40px;
+	border-top: 1px solid #ede9fe;
+}
+
+.wsk-changelog__release-header {
+	display: flex;
+	align-items: baseline;
+	gap: 12px;
+	margin-bottom: 14px;
+}
+
+.wsk-changelog__version {
+	font-size: 16px;
+	font-weight: 700;
+	color: var(--wsk-text);
+}
+
+.wsk-changelog__date {
+	font-size: 13px;
+	color: var(--wsk-primary);
+	background: var(--wsk-primary-soft);
+	border-radius: 999px;
+	padding: 3px 9px;
+}
+
+.wsk-changelog__intro {
+	font-size: 14px;
+	color: #666;
+	line-height: 1.6;
+	margin: 0 0 16px;
+}
+
+.wsk-changelog__list {
+	margin: 0;
+	padding: 0 0 0 20px;
+}
+
+.wsk-changelog__list li {
+	font-size: 14px;
+	color: #444;
+	line-height: 1.7;
+	margin-bottom: 6px;
+	list-style-type: disc;
+}
+
+.wsk-changelog__list li:last-child {
+	margin-bottom: 0;
+}
+
+/* ── Support ── */
+.wsk-support__body {
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	padding: 36px 40px;
+	max-width: 620px;
+}
+
+.wsk-support__body h2 {
+	font-size: 16px;
+	font-weight: 600;
+	color: #1e1e1e;
+	margin: 0 0 16px;
+	padding: 0;
+}
+
+.wsk-support__body p {
+	font-size: 14px;
+	line-height: 1.7;
+	color: #444;
+	margin: 0 0 14px;
+}
+
+.wsk-support__button {
+	display: inline-block;
+	margin-top: 8px;
+	padding: 10px 20px;
+	background: var(--wsk-primary);
+	color: #fff;
+	font-size: 13px;
+	font-weight: 600;
+	text-decoration: none;
+	border-radius: 6px;
+	transition: background 0.15s;
+}
+
+.wsk-support__button:hover {
+	background: var(--wsk-primary-hover);
+	color: #fff;
+}
